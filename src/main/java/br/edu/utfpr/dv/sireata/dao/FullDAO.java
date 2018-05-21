@@ -15,14 +15,14 @@ import java.util.Set;
 
 public abstract class FullDAO {
 
-    protected BuscarPorIdDAO buscarPorIDDAO;
+    protected BuscarPorIdDAO buscarPorIdDAO;
     protected CarregarObjetoDAO carregarObjetoDAO;
-    protected ListarPorAtaDAO listaPorAtaDAO;
+    protected ListarPorAtaDAO listarPorAtaDAO;
     protected SalvarDAO salvarDAO;
     protected ExcluirDAO excluirDAO;
 
     public Set<? extends EntityDAO> buscar(int value) throws SQLException {
-        return buscarPorIDDAO.buscarPorId(value);
+        return buscarPorIdDAO.buscarPorId(value);
     }
 
     public EntityDAO carregarObjeto(ResultSet rs) throws SQLException {
@@ -30,7 +30,7 @@ public abstract class FullDAO {
     }
 
     public List<Anexo> listar(int value) throws SQLException {
-        return listaPorAtaDAO.listarPorAta(value);
+        return listarPorAtaDAO.listarPorAta(value);
     }
 
     public int salvar(EntityDAO newEntity) throws SQLException {

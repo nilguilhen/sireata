@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 public class AnexoCarregarObjetoDAO implements CarregarObjetoDAO {
     
+        @Override
         public EntityDAO carregarObjeto(ResultSet rs) throws SQLException{
         
             	Anexo anexo = new Anexo();
