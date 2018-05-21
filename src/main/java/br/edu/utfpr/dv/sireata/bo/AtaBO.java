@@ -17,6 +17,11 @@ import br.edu.utfpr.dv.sireata.dao.AtaDAO;
 import br.edu.utfpr.dv.sireata.dao.AtaParticipanteDAO;
 import br.edu.utfpr.dv.sireata.dao.OrgaoDAO;
 import br.edu.utfpr.dv.sireata.dao.PautaDAO;
+import br.edu.utfpr.dv.sireata.dao.algorithms.anexo.AnexoBuscarPorIdDAO;
+import br.edu.utfpr.dv.sireata.dao.algorithms.anexo.AnexoCarregarObjetoDAO;
+import br.edu.utfpr.dv.sireata.dao.algorithms.anexo.AnexoExcluirDAO;
+import br.edu.utfpr.dv.sireata.dao.algorithms.anexo.AnexoListarPorAtaDAO;
+import br.edu.utfpr.dv.sireata.dao.algorithms.anexo.AnexoSalvarDAO;
 import br.edu.utfpr.dv.sireata.model.Anexo;
 import br.edu.utfpr.dv.sireata.model.Ata;
 import br.edu.utfpr.dv.sireata.model.Pauta;
@@ -26,6 +31,7 @@ import br.edu.utfpr.dv.sireata.util.StringUtils;
 import br.edu.utfpr.dv.sireata.model.Ata.TipoAta;
 import br.edu.utfpr.dv.sireata.model.AtaParticipante;
 import br.edu.utfpr.dv.sireata.model.AtaReport;
+import br.edu.utfpr.dv.sireata.model.EntityDAO;
 import br.edu.utfpr.dv.sireata.model.Orgao;
 import br.edu.utfpr.dv.sireata.model.ParticipanteReport;
 
@@ -231,11 +237,16 @@ public class AtaBO {
 				int i = 1;
 				
 				for(Anexo a : ata.getAnexos()) {
-					AnexoDAO adao = new AnexoDAO();
+					AnexoDAO adao = new AnexoDAO(
+                                                        new AnexoBuscarPorIdDAO(),
+                                                        new AnexoCarregarObjetoDAO(),
+                                                        new AnexoExcluirDAO(),
+                                                        new AnexoListarPorAtaDAO(),
+                                                        new AnexoSalvarDAO());
 					
 					a.getAta().setIdAta(id);
 					a.setOrdem(i);
-					adao.salvar(a);
+					adao.salvar((EntityDAO) a);
 					i++;
 				}
 			}
